@@ -138,9 +138,10 @@
 </head>
 <body>
     <nav>
-        <a href="index.html">My Cause</a>
+        <a href="my-cause.html">My Cause</a>
         <a href="book-bans.html">Book Bans</a>
         <a href="movie-bans.html">Movie Bans</a>
+        <a href="video-game-bans.html">Video Game Bans</a>
         <a href="about-me.html">About Me</a>
         <a href="discussion.html">Discussion</a>
     </nav>
@@ -160,31 +161,59 @@
     </div>
 
     <script>
-        let posts = JSON.parse(localStorage.getItem('posts')) || [];
+        const apiUrl = 'https://your-backend-url/api/posts'; // Replace with your actual backend API URL
+        let posts = [];
         let currentPage = 1;
         const postsPerPage = 5;
 
-        function savePosts() {
-            localStorage.setItem('posts', JSON.stringify(posts));
+        async function fetchPosts() {
+            try {
+                const response = await fetch(apiUrl);
+                posts = await response.json();
+                displayPosts();
+            } catch (error) {
+                console.error('Error fetching posts:', error);
+            }
         }
 
-        function addPost() {
+        async function addPost() {
             const postContent = document.getElementById('new-post').value.trim();
             if (postContent === '') return;
-            posts.unshift({ content: postContent, comments: [] });
-            document.getElementById('new-post').value = '';
-            savePosts();
-            displayPosts();
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ content: postContent }),
+                });
+                const newPost = await response.json();
+                posts.unshift(newPost);
+                document.getElementById('new-post').value = '';
+                displayPosts();
+            } catch (error) {
+                console.error('Error adding post:', error);
+            }
         }
 
-        function addComment(postIndex) {
-            const commentInput = document.querySelector(`#post-${postIndex} textarea`);
+        async function addComment(postId) {
+            const commentInput = document.querySelector(`#post-${postId} textarea`);
             const comment = commentInput.value.trim();
             if (comment === '') return;
-            posts[postIndex].comments.push(comment);
-            commentInput.value = '';
-            savePosts();
-            displayPosts();
+
+            try {
+                const response = await fetch(`${apiUrl}/${postId}/comments`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ content: comment }),
+                });
+                const updatedPost = await response.json();
+                const postIndex = posts.findIndex(post => post.id === updatedPost.id);
+                if (postIndex !== -1) posts[postIndex] = updatedPost;
+                commentInput.value = '';
+                displayPosts();
+            } catch (error) {
+                console.error('Error adding comment:', error);
+            }
         }
 
         function displayPosts() {
@@ -195,17 +224,16 @@
             const end = start + postsPerPage;
             const paginatedPosts = posts.slice(start, end);
 
-            paginatedPosts.forEach((post, index) => {
-                const postIndex = start + index;
+            paginatedPosts.forEach(post => {
                 const postElement = document.createElement('div');
                 postElement.className = 'post';
-                postElement.id = `post-${postIndex}`;
+                postElement.id = `post-${post.id}`;
                 postElement.innerHTML = `
                     <div class="content">${post.content}</div>
                     <div class="comments">
-                        ${post.comments.map(comment => `<p style="margin-left: 20px;">- ${comment}</p>`).join('')}
+                        ${post.comments.map(comment => `<p style="margin-left: 20px;">- ${comment.content}</p>`).join('')}
                         <textarea placeholder="Write a comment..."></textarea>
-                        <button onclick="addComment(${postIndex})">Comment</button>
+                        <button onclick="addComment(${post.id})">Comment</button>
                     </div>
                 `;
                 postContainer.appendChild(postElement);
@@ -220,7 +248,7 @@
             displayPosts();
         }
 
-        displayPosts();
+        fetchPosts();
     </script>
 </body>
 </html>
