@@ -5,42 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Right to Knowledge</title>
     <style>
-        
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: red; /* Background color of the page */
+            background-color: red;
             color: white;
         }
 
         nav {
-            background-color: black; /* Navigation bar background */
-            overflow: hidden; /* Clears floats */
+            background-color: black;
+            overflow: hidden;
             padding: 10px 0;
         }
 
         nav a {
-            float: left; /* Horizontal alignment of buttons */
+            float: left;
             display: block;
-            color: white; /* Button text color */
+            color: white;
             text-align: center;
-            padding: 10px 20px; /* Button padding */
-            text-decoration: none; /* Removes underline from links */
+            padding: 10px 20px;
+            text-decoration: none;
             font-weight: bold;
         }
 
         nav a:hover {
-            background-color: white; /* Hover background color */
-            color: black; /* Hover text color */
+            background-color: white;
+            color: black;
         }
 
         main {
             padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1, h2 {
             text-align: center;
         }
 
+        .section {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
 
-          </style>
+        .section img {
+            max-width: 300px;
+            height: auto;
+            margin-left: 20px;
+            border: 3px solid white;
+        }
+
+        .section p {
+            font-family: Georgia, serif;
+            line-height: 1.6;
+            flex: 1;
+        }
+    </style>
 </head>
 <body>
     <nav>
@@ -54,12 +75,21 @@
 
     <main>
         <h1>A Right to Knowledge</h1>
-        <p>All sorts of literature and media are banned worldwide, and I believe that taking away access to information and art violates a human right, the right to knowledge. Everyone should be able to view what they want to, regardless of the country or administration's policies. In many cases, banning can be a little irrational, or even deliberate ignorance when a government bans something based on fear that there may be dissent among their citizens. So, join my cause. Fight against institutions and governments to take back our right to knowledge!</p>
-        <h2>Why are they banned?</h2>
-        <p>Why do literature and media get banned? Well, most reasons are because of indecent, profane, or just obscene content. A book such as Harper Lee's "To Kill a Mockingbird" is banned because of the heavy language in the book. A lot of viewers and parents alike said that the use of the N-word, or topics of discussion such as rape wasn't something people should teach, even at a high school level. For the media, South Park is a very challenging show for its political comedy and social satire. Sexual and racial themes are a pretty hot topic and tend to be banned a lot for either religious reasons or to keep it out of the youth's hands.></p>
-        <h2>Who is behind all of this? </h2>
-        <p>Schools, governments, religious institutions, and other administrations like libraries or shops can either straight up ban things or just remove them from their shelves. Schools, especially in America, are very known for banning countless books based off the reasons stated in the last paragraph. Around 4,120 books have been banned across America in just 2024. Government bannings are usually tied to the government's ideologies or if the church is a heavy aspect of the government, in which those cases they are noted as "blasphemous". In the past, authoritarian governments ban books and media if it could cause public dissent, as said above. "1984", by George Orwell, is a great example of this. In South Korea, a current authoritarian government, 1984 is banned. In the book, it follows a character in a society governed by a totalitarian government. The character ends up joining a revolution and fights against his country. Governments with some of the same qualities may not want it to be shown to the public, as it may cause a revolution if they end up drawing similarities.</p>
-    </main>
 
-   </body>
+        <div class="section">
+            <p>All sorts of literature and media are banned worldwide, and I believe that taking away access to information and art violates a human right, the right to knowledge. Everyone should be able to view what they want to, regardless of the country or administration's policies. In many cases, banning can be irrational or deliberate ignorance when a government bans something based on fear that there may be dissent among their citizens. Join my cause to fight against institutions and governments and take back our right to knowledge!</p>
+            <img src="placeholder-image.jpg" alt="Image related to knowledge bans">
+        </div>
+
+        <div class="section">
+            <p>Why do literature and media get banned? Most reasons involve indecent, profane, or obscene content. For example, Harper Lee's "To Kill a Mockingbird" is often banned for its heavy language and themes such as racism and sexual violence. Similarly, shows like "South Park" face bans for political satire and controversial themes. Religious or political reasons often lead to banning media, particularly to shield youth or suppress dissenting ideas.</p>
+            <img src="placeholder-image.jpg" alt="Image related to media bans">
+        </div>
+
+        <div class="section">
+            <p>Schools, governments, religious institutions, and other organizations frequently ban books and media. Schools in the United States have banned thousands of books, citing inappropriate content or offensive language. Governments may ban works based on ideological conflicts. For example, George Orwell's "1984" is banned in some authoritarian regimes for its critique of totalitarianism. Such bans aim to suppress ideas that could incite dissent or revolution.</p>
+            <img src="placeholder-image.jpg" alt="Image related to banning institutions">
+        </div>
+    </main>
+</body>
 </html>
