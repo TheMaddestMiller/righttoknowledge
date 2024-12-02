@@ -161,15 +161,20 @@
     </div>
 
     <script>
-        let posts = [];
+        let posts = JSON.parse(localStorage.getItem('posts')) || [];
         let currentPage = 1;
         const postsPerPage = 5;
+
+        function savePosts() {
+            localStorage.setItem('posts', JSON.stringify(posts));
+        }
 
         function addPost() {
             const postContent = document.getElementById('new-post').value.trim();
             if (postContent === '') return;
             posts.unshift({ content: postContent, comments: [] });
             document.getElementById('new-post').value = '';
+            savePosts();
             displayPosts();
         }
 
@@ -179,6 +184,7 @@
             if (comment === '') return;
             posts[postIndex].comments.push(comment);
             commentInput.value = '';
+            savePosts();
             displayPosts();
         }
 
